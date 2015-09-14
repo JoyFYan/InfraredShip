@@ -7,14 +7,16 @@ end
 if v==3
     I=rgb2gray(I);
 end
+all=m*n;
 [con,x]=imhist(I);
+conre=con/all;
 figure(1)
 subplot(1,3,1)
 imshow(I);
 subplot(1,3,2)
 bar(x,con);
 
-all=m*n;
+
 K=uint8(zeros(30,320,8));
 figure(2)
 for i=1:8
@@ -24,6 +26,10 @@ for i=1:8
     imshow(K(:,:,i));
     subplot(4,4,i+8)
     bar(temphist)
+    
+    temphistre=temphist/30/320;
+    tempsub=conre-temphistre;
+    subres=sum(abs(tempsub))
 end
 for i=1:255
     temp=length(find(I==i));
