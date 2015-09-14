@@ -44,6 +44,9 @@ for i=3:256
         meanD=mean(D);%Æ½¾ùËã·¨£¿
         Dres(num)=meanD;
         subres(num)=sub;
+        s=std(D,0,1);
+        sres(num)=s;
+        
         num=num+1;
     else 
         temp=temp+length(find((I<i)&(I>last)));
@@ -51,3 +54,4 @@ for i=3:256
 end
 disp(Dres);
 disp(subres);
+disp(sres);
