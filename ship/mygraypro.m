@@ -1,7 +1,7 @@
 function [] = mygraypro(I)
 
 if nargin==0
-       I=imread('4.bmp');
+       I=imread('1.bmp');
 end
 [m, n, v]=size(I);
 if v==3
@@ -34,7 +34,7 @@ end
 % for i=1:255
 %     temp=length(find(I==i));
 % end
-[val ind]=min(subres);
+[val ind]=min(subres)
 lvl=graythresh(K(:,:,ind));
 R=im2bw(K(:,:,ind),lvl);
 figure
