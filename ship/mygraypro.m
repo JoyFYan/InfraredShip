@@ -29,8 +29,13 @@ for i=1:8
     
     temphistre=temphist/30/320;
     tempsub=conre-temphistre;
-    subres=sum(abs(tempsub))
+    subres(i)=sum(abs(tempsub));
 end
-for i=1:255
-    temp=length(find(I==i));
-end
+% for i=1:255
+%     temp=length(find(I==i));
+% end
+[val ind]=min(subres);
+lvl=graythresh(K(:,:,ind));
+R=im2bw(K(:,:,ind),lvl);
+figure
+imshow(R);
