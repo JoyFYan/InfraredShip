@@ -1,6 +1,6 @@
 clear;close all;clc;
 k=1;
-I=imread('10.bmp');
+I=imread('4.bmp');
 J=rgb2gray(I);
 [m n]=size(J);
 figure;
@@ -15,5 +15,9 @@ figure
 imshow(I2);
 max=max(max(I2))
 I3=int16(I2)*255/int16(max);
+
 figure
 imshow(uint8(I3));
+figure
+h=sum(I3,2);
+bar(h)
