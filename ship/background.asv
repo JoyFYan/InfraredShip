@@ -1,6 +1,6 @@
 clear;close all;clc;
 k=1;
-I=imread('3.bmp');
+I=imread('7.bmp');
 J=rgb2gray(I);
 [m, n]=size(J);
 figure(1);
@@ -14,7 +14,7 @@ thresh = 255*graythresh(J);     %自动确定二值化阈值
 I2 = J-k*thresh*uint8(ones(m,n));
 subplot(222)
 imshow(I2);
-max=max(max(I2));
+max=max(max(I2))
 I3=int16(I2)*255/int16(max);
 
 
@@ -26,7 +26,7 @@ h=sum(I3,2);
 bar(h)
 
 figure(2)
-subplot(321)
+subplot(231)
 fd=fftshift(fft2(I3));
 %imshow(abs(log(1+fd)),[ ]);
  H=zeros(m,n);
@@ -46,7 +46,7 @@ fd=fftshift(fft2(I3));
 
 fr=real(ifft2(ifftshift(FS)));
 ret=im2uint8(mat2gray(fr));
-subplot(322),imshow(ret);
+subplot(232),imshow(ret);
 
 % thresh = graythresh(ret);     %自动确定二值化阈值
 % I2 = im2bw(ret,thresh);
@@ -54,13 +54,13 @@ subplot(322),imshow(ret);
 % imshow(I2)
 
 figure(2)
-subplot(323)
+subplot(223)
 fd=fftshift(fft2(I3));
 %imshow(abs(log(1+fd)),[ ]);
  H=zeros(m,n);
  for i =1:m
      for j=1:n
-         if((sqrt((i-m/2)^2/(n/1.5)+(j-n/2)^2))>10)%滤除横向低频
+         if((sqrt((i-m/2)^2/(n/4)+(j-n/2)^2))>10)%滤除横向低频
              H(i,j)=1;
 %             D=sqrt((m-M)^2+(n-N)^2);
 %             H(m,n)=exp((-D^2)/(2*(D0)^2));
@@ -74,15 +74,15 @@ fd=fftshift(fft2(I3));
 
 fr=real(ifft2(ifftshift(FS)));
 ret=im2uint8(mat2gray(fr));
-subplot(324),imshow(ret);
+subplot(224),imshow(ret);
 
-subplot(325)
+subplot(223)
 fd=fftshift(fft2(I3));
 %imshow(abs(log(1+fd)),[ ]);
  H=zeros(m,n);
  for i =1:m
      for j=1:n
-         if((sqrt((i-m/2)^2+(j-n/2)^2/(n/1.5)))>10)%滤除纵向低频
+         if((sqrt((i-m/2)^2/(n/4)+(j-n/2)^2))>10)%滤除横向低频
              H(i,j)=1;
 %             D=sqrt((m-M)^2+(n-N)^2);
 %             H(m,n)=exp((-D^2)/(2*(D0)^2));
@@ -96,4 +96,4 @@ fd=fftshift(fft2(I3));
 
 fr=real(ifft2(ifftshift(FS)));
 ret=im2uint8(mat2gray(fr));
-subplot(326),imshow(ret);
+subplot(224),imshow(ret);
