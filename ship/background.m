@@ -2,6 +2,7 @@ clear;close all;clc;
 k=1;
 I=imread('4.bmp');
 J=rgb2gray(I);
+J=histeq(J);
 [m, n]=size(J);
 figure(1);
 subplot(221)
