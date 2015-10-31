@@ -1,6 +1,6 @@
 clear;close all;clc;
 k=1;
-I=imread('4.bmp');
+I=imread('5.bmp');
 J=rgb2gray(I);
 J=histeq(J);
 [m, n]=size(J);
