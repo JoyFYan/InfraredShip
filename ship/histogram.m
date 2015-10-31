@@ -1,8 +1,8 @@
 clc ;close all;clear;
-I=imread('8.bmp');%读取图片
+I=imread('4.bmp');%读取图片
 tempmax=0;%找最大值临时变量
 pos=0;%此时灰度位置
-khist=0.5;%均衡程度系数
+khist=1.5;%均衡程度系数
 J=rgb2gray(I);%灰度化
 I1=histeq(J);%自带均衡
 figure(1);
@@ -19,14 +19,15 @@ Jmat=histeq(J);
 
 imshow(Jmat);
 title('自动灰度直方图均衡')
-h=imhist(Jmat);%计算直方图
+he=imhist(Jmat);%计算直方图
 
 subplot(324)
-bar(h)%绘制直方图
+bar(he)%绘制直方图
 title('灰度直方图结果')
 %imshow(h)
 [m,n]=size(J);
-b=find(h>(m*n/10000), 1, 'last' );%找到最大的不为阈值的灰度位置
+b=find(h>(50), 1, 'last' );%找到最大的不为阈值的灰度位置
+c=find(h>(50) , 1 );%找到最小的不为阈值的灰度位置
 k=zeros(1,256);
 k0=zeros(1,256);
 for i=2:256%正向计算斜率
