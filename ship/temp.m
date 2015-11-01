@@ -1,5 +1,5 @@
 clc ;close all;clear;
-I=imread('lowd.png');%读取图片
+I=imread('ship.png');%读取图片
 tempmax=0;%找最大值临时变量
 pos=0;%此时灰度位置
 khist=1.5;%均衡程度系数
@@ -11,11 +11,12 @@ J=filter2(A,J,'same');
 %J=medfilt2(J,[5 5]);
 [m,n]=size(J);
 %% 行列均值阈值
+threshold=5;
 avrm=mean(J,2);
 avrn=mean(J,1);
 for i=1:m
    for j=1:n
-      if  (and((J(i,j)>avrm(i)), (J(i,j)>avrn(j))))
+      if  (and((J(i,j)-avrm(i)>threshold), (J(i,j)-avrn(j)>threshold)))
           J(i,j)=1;
       else
           J(i,j)=0;
