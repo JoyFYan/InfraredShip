@@ -3,6 +3,7 @@ function [ output ] = myhistf( input,khist,lowgray )
 %   此处显示详细说明
 [m,n]=size(input);
 tempmax=0;
+pos=0;
 h=imhist(input);
 b=find(h>(lowgray), 1, 'last' );%找到最大的不为阈值的灰度位置
 c=find(h>(lowgray) , 1 );%找到最小的不为阈值的灰度位置

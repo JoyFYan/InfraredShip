@@ -1,7 +1,10 @@
 clear;close all;clc;
-k=1;
-I=imread('5.bmp');
+k=0.5;
+I=imread('11.bmp');
+figure(3)
+imshow(I)
 J=rgb2gray(I);
+J = myhistf( J,1.5,600 );
 J=histeq(J);
 [m, n]=size(J);
 figure(1);
@@ -12,7 +15,6 @@ hist_im=imhist(J);
 % subplot(222)
 % bar(hist_im);
 thresh = 255*graythresh(J);     %自动确定二值化阈值
-%I2 = im2bw(J,thresh);
 I2 = J-k*thresh*uint8(ones(m,n));
 subplot(222)
 
@@ -27,6 +29,9 @@ I3=uint8(I3);
 
 imshow(I3);
 title('提高对比度')
+
+
+
 subplot(224)
 h=sum(I3,2);
 bar(h)
