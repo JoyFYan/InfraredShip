@@ -1,14 +1,12 @@
 clc ;close all;clear;
-I=imread('lowd.png');%读取图片
+I=imread('ship1.png');%读取图片
 tempmax=0;%找最大值临时变量
 pos=0;%此时灰度位置
 khist=1.5;%均衡程度系数
 J=rgb2gray(I);%灰度化
 
-J=myhistf( J,1,500 );
-A=fspecial('average',8);
-J=filter2(A,J,'same');
-%J=medfilt2(J,[5 5]);
+J=myhistf( J,1.5,500 );
+A=fspecial('average',n); 
 [m,n]=size(J);
 %% 行列均值阈值
 avrm=mean(J,2);
@@ -28,7 +26,7 @@ imshow(J,[])
 
 subplot(212)
 BW2 = bwareaopen(J,20,8);
-IM2 = imclearborder(BW2,8) ;
+IM2 = imclearborder(BW2,4) ;
 imshow(IM2,[])
      
 

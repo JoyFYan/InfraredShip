@@ -1,8 +1,9 @@
 clc ;close all;clear;
-I=imread('1.bmp');%读取图片
+I=imread('lowd.png');%读取图片
 tempmax=0;%找最大值临时变量
 pos=0;%此时灰度位置
-khist=0.1;%均衡程度系数
+lowgray=600;%最小不为0灰度数
+khist=1.5;%均衡程度系数
 J=rgb2gray(I);%灰度化
 I1=histeq(J);%自带均衡
 figure(1);
@@ -27,8 +28,8 @@ bar(he)%绘制直方图
 title('灰度直方图结果')
 %imshow(h)
 [m,n]=size(J);
-b=find(h>(50), 1, 'last' );%找到最大的不为阈值的灰度位置
-c=find(h>(50) , 1 );%找到最小的不为阈值的灰度位置
+b=find(h>(lowgray), 1, 'last' );%找到最大的不为阈值的灰度位置
+c=find(h>(lowgray) , 1 );%找到最小的不为阈值的灰度位置
 k=zeros(1,256);
 k0=zeros(1,256);
 for i=c+1:256%正向计算斜率
@@ -79,10 +80,12 @@ G=h0(g);%剔除0后数组
 %LN0=length(g);%非0单元个数
 [~,peaksloc]=findpeaks(G);
 K=length(peaksloc);%极大值个数
-S=zeros(K+2,1);
-S(2:K+1)=G(peaksloc);
-S(1)=G(1);
-S(K+2)=G(end);
+% S=zeros(K+2,1);
+% S(2:K+1)=G(peaksloc);
+% S(1)=G(1);
+% S(K+2)=G(end);
+S=zeros(K,1);
+S=G(peaksloc);
 T1=mean(S);%高阈值
 Hr=h0;%重设灰度级
 Hr(h0>T1)=T1;
@@ -93,7 +96,7 @@ Hr(h0>T1)=T1;
 M=h0(g+floor(pos/khist));%剔除0后数组
 %LN0=length(g);% 非0单元个数
 [~,peaksloc]=findpeaks(256-M);
-K1=length(peaksloc);%极大值个数
+K1=length(peaksloc);%极小值个数
 N=zeros(K1+2,1);
 N(2:K1+1)=M(peaksloc);
 N(1)=M(1);
