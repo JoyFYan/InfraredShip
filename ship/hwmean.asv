@@ -1,11 +1,10 @@
 clc ;close all;clear;
-I=imread('ship.png');%读取图片
+I=imread('gra.png');%读取图片
 tempmax=0;%找最大值临时变量
 pos=0;%此时灰度位置
 khist=1.5;%均衡程度系数
 J=rgb2gray(I);%灰度化
-hth=500;%连通区域高阈值
-lth=10;%连通区域低阈值
+
 J=myhistf( J,1,500 );
 A=fspecial('average',8);
 J=filter2(A,J,'same');
@@ -30,33 +29,21 @@ imshow(J,[])
 
 subplot(212)
 
-% BW2 = bwareaopen(J,50,8);
-% IM2 = imclearborder(BW2,8) ;
-% imshow(IM2,[])
-se = strel('line',10,2);
-se1 = strel('square',4);
- BW2= imerode(J,se);
- %BW2= imerode(BW2,se1);
- BW2 = bwmorph(BW2,'hbreak');
-% BW2 = bwmorph(J,'erode',6);
+BW2 = bwareaopen(J,50,8);
+IM2 = imclearborder(BW2,8) ;
+imshow(IM2,[])
 
-% BW2 = bwmorph(J,'thin',5);
-% BW2 = bwmorph(BW2,'erode');
+L = bwlabel(IM2);
+stats=regionprops(L);
+area= cat(1, stats.Area);
+ind=find(area>120);
 
-
-imshow(BW2)
-
-
-% L = bwlabel(J);
-% stats=regionprops(L);
-% area= cat(1, stats.Area);
-% ind=find(or(area>hth,area<lth));
-% for i=1:length(ind)
-%     L(L==ind(i))=0;
-% end
-% 
-% imshow(L,[])
-
+% L = bwlabel(IM2);%标记连通区域
+% stats = regionprops(L);
+% Ar = cat(1, stats.Area);
+% ind = find(Ar ==max(Ar));%找到最大连通区域的标号
+% image_bw(find(L~=ind))=0;%将其他区域置为0
+% figure,imshow(image_bw);%显示最大联通区域
 
 
 
