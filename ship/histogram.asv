@@ -1,5 +1,5 @@
 clc ;close all;clear;
-I=imread('4.bmp');%读取图片
+I=imread('lowd.png');%读取图片
 tempmax=0;%找最大值临时变量
 pos=0;%此时灰度位置
 lowgray=600;%最小不为0灰度数
@@ -104,23 +104,20 @@ N(K1+2)=M(end);
 T2=mean(N);%低阈值
 Hr(h0<T2)=T2;
 figure
+
 MyH=[G;M];
 graylvl=length(MyH);
 for i=2:256
     Hr(i)=(Hr(i-1)+Hr(i)); 
-end
-Dr=zeros(256,1);
+ end
 for i=1:256
-    Dr(i)=ceil(255*Hr(i)/Hr(256));%灰度变换函数
+    Dr(i)=ceil(255*Hr(i)/Hr(256));
 end
-result=ret;
-for i=256:-1:1
-    result(find(result==i))=Dr(i);
+Df=zeros(256,1);
+Df(1)=Dr(1);
+for i=2:256
+    Df(i)=Dr(i)-Dr(i-1);
 end
-imshow(result,[])
-figure
-z=imhist(result);
-bar(z)
 % Fr=zeros(graylvl,1);%累计直方图
 % Fr(1)=MyH(1);
 % for i=2:graylvl
