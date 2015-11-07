@@ -1,5 +1,5 @@
 clc;close all;clear;
-I=imread('9.bmp');%读取图片
+I=imread('2.bmp');%读取图片
 lamda=2;
 num=4;%极值数量
 J=rgb2gray(I);%灰度化
@@ -36,4 +36,4 @@ gdata(:,5)=gdata(:,2)*0.8+gdata(:,3)+0.5*gdata(:,4);
 [~,ind]=max(gdata(:,5));
 line=gdata(ind,1);
 subplot(211)
-plot([0,n],[line,line],'r-');
+plot([0,n],[line,line],'r-');%绘出海天线

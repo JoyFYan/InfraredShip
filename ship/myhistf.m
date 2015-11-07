@@ -45,13 +45,13 @@ for i=1:m
     end
 end
 output=uint8(J0);
-subplot(325)
-imshow(output,[])
-title('改进灰度直方图均衡')
-h0=imhist(output);%计算直方图
-subplot(326)
-bar(h0)%绘制直方图
-title('灰度直方图结果')
+% subplot(325)
+% imshow(output,[])
+% title('改进灰度直方图均衡')
+% h0=imhist(output);%计算直方图
+% subplot(326)
+% bar(h0)%绘制直方图
+% title('灰度直方图结果')
 
 
 
