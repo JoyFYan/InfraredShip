@@ -1,4 +1,4 @@
-function [ output ] = myhistf( input,khist,lowgray )
+function [ output,pos ] = myhistf( input,khist,lowgray )
 %双向直方图均衡
 %   此处显示详细说明
 

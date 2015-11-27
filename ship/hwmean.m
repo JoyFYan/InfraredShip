@@ -1,16 +1,18 @@
+%%均值目标检测
 clc ;close all;clear;
-I=imread('4.bmp');%读取图片
+I=imread('lowd.png');%读取图片
 tempmax=0;%找最大值临时变量
 pos=0;%此时灰度位置
+hth=500;%连通区域高阈值
+lth=10;%连通区域低阈值
 khist=1.5;%均衡程度系数
 J=rgb2gray(I);%灰度化
-[m,n]=size(J);
+[m,n]=size(J);%图像大小
 figure(1)
 subplot(411)
 imshow(J)
 title('原始图像')
-hth=500;%连通区域高阈值
-lth=20;%连通区域低阈值
+
 J=myhistf( J,1.5,600 );
 line=myline(J);
 subplot(412)
@@ -18,10 +20,11 @@ imshow(J)
 J(1:uint8(line-floor(m/10)),:)=0;
 A=fspecial('average',8);%均值滤波
 J=filter2(A,J,'same');
+
 %J=medfilt2(J,[5 5]);
 
 %% 行列均值阈值
-threshold=5;%均值阈值
+threshold=8;%均值阈值
 avrm=mean(J,2);%求行平均
 avrn=mean(J,1);%求列平均
 stdm=std(J,0,2);
@@ -42,13 +45,13 @@ title('行列均值结果')
 subplot(414)
 
 
-L = bwlabel(J);
-stats=regionprops(L);
-area= cat(1, stats.Area);
-ind=find(or(area>hth,area<lth));
-for i=1:length(ind)
-    L(L==ind(i))=0;
-end
+% L = bwlabel(J);
+% stats=regionprops(L);
+% area= cat(1, stats.Area);
+% ind=find(or(area>hth,area<lth));
+% for i=1:length(ind)
+%     L(L==ind(i))=0;
+% end
 
 % BW2 = bwareaopen(J,50,8);
 % IM2 = imclearborder(BW2,8) ;
@@ -58,7 +61,7 @@ se1 = strel('square',4);
  BW2= imerode(J,se1);
  %BW2= imerode(BW2,se1);
  BW2 = bwmorph(BW2,'hbreak');
- BW2 = bwmorph(BW2,'erode',3);
+ %BW2 = bwmorph(BW2,'erode',1);
 
 % BW2 = bwmorph(J,'thin',5);
 % BW2 = bwmorph(BW2,'erode');
@@ -68,6 +71,13 @@ imshow(BW2)
 title('腐蚀结果')
 
 
+L = bwlabel(BW2);
+stats=regionprops(L);
+area= cat(1, stats.Area);
+ind=find(or(area>hth,area<lth));
+for i=1:length(ind)
+    L(L==ind(i))=0;
+end
 
 figure(2)
 imshow(L)

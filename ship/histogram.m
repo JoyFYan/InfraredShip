@@ -1,5 +1,5 @@
 clc ;close all;clear;
-I=imread('4.bmp');%读取图片
+I=imread('lowd.png');%读取图片
 tempmax=0;%找最大值临时变量
 pos=0;%此时灰度位置
 lowgray=600;%最小不为0灰度数

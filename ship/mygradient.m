@@ -1,9 +1,9 @@
 clc;close all;clear;
-I=imread('2.bmp');%读取图片
+I=imread('4.bmp');%读取图片
 lamda=2;
 num=4;%极值数量
 J=rgb2gray(I);%灰度化
-I=myhistf( J,1.5,600 );
+%I=myhistf( J,1.5,600 );
 subplot(211)
 imshow(I)
 hold on
@@ -32,7 +32,7 @@ for i=1:num
 end
 gdata(:,2)=gdata(:,2)/gdata(1,2);
 gdata(:,4)=1-gdata(:,4)/max(gdata(:,4));
-gdata(:,5)=gdata(:,2)*0.8+gdata(:,3)+0.5*gdata(:,4);
+gdata(:,5)=gdata(:,2)*0.8+1*gdata(:,3)+1*gdata(:,4);
 [~,ind]=max(gdata(:,5));
 line=gdata(ind,1);
 subplot(211)
