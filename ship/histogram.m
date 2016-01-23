@@ -103,16 +103,31 @@ N(1)=M(1);
 N(K1+2)=M(end);
 T2=mean(N);%低阈值
 Hr(h0<T2)=T2;
-
+figure
 MyH=[G;M];
 graylvl=length(MyH);
-Fr=zeros(graylvl,1);%累计直方图
-Fr(1)=MyH(1);
-for i=2:graylvl
-   Fr(i)=Fr(i-1)+MyH(i); 
+for i=2:256
+    Hr(i)=(Hr(i-1)+Hr(i)); 
 end
-
-Dr=zeros(graylvl,1);
-for i=1:graylvl
-   Dr(i)=floor((graylvl-1)*Fr(i)/Fr(graylvl)); 
+Dr=zeros(256,1);
+for i=1:256
+    Dr(i)=ceil(255*Hr(i)/Hr(256));%灰度变换函数
 end
+result=ret;
+for i=256:-1:1
+    result(find(result==i))=Dr(i);
+end
+imshow(result,[])
+figure
+z=imhist(result);
+bar(z)
+% Fr=zeros(graylvl,1);%累计直方图
+% Fr(1)=MyH(1);
+% for i=2:graylvl
+%    Fr(i)=Fr(i-1)+MyH(i); 
+% end
+% 
+% Dr=zeros(graylvl,1);
+% for i=1:graylvl
+%    Dr(i)=floor((graylvl-1)*Fr(i)/Fr(graylvl)); 
+% end
