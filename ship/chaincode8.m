@@ -27,7 +27,7 @@ dir=mod(newdir+d-1,8);
 cc=[cc,dir];
 x=x+n(dir+1,1);y=y+n(dir+1,2);
 %判别链码的结束标志
-    if ((x==first(1))&&(y==first(2)))
+    if and((x==first(1)),(y==first(2)))
         flag=0;
     end
 end
