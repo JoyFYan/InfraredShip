@@ -1,13 +1,16 @@
 clc;close all;clear;
-I=imread('hard.bmp');%读取图片
+I=imread('4.bmp');%读取图片
 lamda=2;
 num=4;%极值数量
 J=rgb2gray(I);%灰度化
 %I=myhistf( J,1.5,600 );
-subplot(211)
+% subplot(211)
+figure (1)
 imshow(I)
+
+set(gca,'looseInset',[0 0 0 0])
 hold on
-[m,n]=size(I);
+[m,n]=size(J);
 
 % Sy=[-1,-1,-1;1,1,1];
 % Sx=Sy';
@@ -19,11 +22,16 @@ hold on
 %gradienty=sum(Dyp(ceil(m/30):m-ceil(m/30),:),2);
 Gy=zeros(m,n);
 for i=ceil(m/30):m-ceil(m/30)
-   Gy(i,:)=double(I(i,:))-double(I(i+1,:));%纵向梯度计算
+   Gy(i,:)=(double(J(i,:))-double(J(i+1,:)));%纵向梯度计算
 end
 gradienty=sum(Gy,2);%每行梯度求和
-subplot(212)
+% subplot(212)
+figure (2)
 bar(gradienty)
+axis([0 240 0 5000]) 
+title('行累加结果')
+xlabel('行号')
+ylabel('梯度灰度和')
 gdata=zeros(num,6);%创建评价矩阵
 [gdata(:,2),gdata(:,1)]=findpeaks(gradienty,'NPeaks',num,'SortStr','descend');%评价条件1：梯度和极值
 for i=1:num
@@ -35,7 +43,13 @@ gdata(:,2)=gdata(:,2)/gdata(1,2);
 gdata(:,4)=1-gdata(:,4)/max(gdata(:,4));%归一化
 gdata(:,5)=gdata(:,5)/max(gdata(:,5));%归一化
 gdata(:,6)=gdata(:,2)*0.8+1*gdata(:,3)+1*gdata(:,4)+1*gdata(:,5);%乘以不同影响因子，得到结果
-[~,ind]=max(gdata(:,6));
-line=gdata(ind,1);
-subplot(211)
+[~,ind]=max(gdata(:,1));
+% line=gdata(ind,1);
+line=gdata(1);
+% subplot(211)
+figure (1)
 plot([0,n],[line,line],'r-');%绘出海天线
+figure (3)
+colormap(gray)
+imagesc(Gy);
+axis off
