@@ -1,5 +1,5 @@
 clc;close all;clear;
-I=imread('5.bmp');%读取图片
+I=imread('2.bmp');%读取图片
 lamda=2;
 num=5;%极值数量
 J=rgb2gray(I);%灰度化
@@ -56,7 +56,7 @@ gdata(:,6)=[5:-1:1]/5;
 
 gdata(:,4)=1-gdata(:,4)/max(gdata(:,4));%归一化
 gdata(:,5)=gdata(:,5)/max(gdata(:,5));%归一化
-gdata(:,7)=gdata(:,2)*0.2+gdata(:,3)+0.8*gdata(:,4)+gdata(:,5)+0.8*gdata(:,6);%乘以不同影响因子，得到结果
+gdata(:,7)=gdata(:,2)*0.3+gdata(:,3)+1.2*gdata(:,4)+*gdata(:,5)+0.7*gdata(:,6);%乘以不同影响因子，得到结果
 [~,ind]=max(gdata(:,7));
 line=gdata(ind,1);
 %line=gdata(1);

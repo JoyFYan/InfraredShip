@@ -1,5 +1,5 @@
 clc;close all;clear;
-I=imread('5.bmp');%读取图片
+I=imread('3.bmp');%读取图片
 lamda=2;
 num=5;%极值数量
 J=rgb2gray(I);%灰度化
@@ -41,7 +41,7 @@ gdata=zeros(num,7);%创建评价矩阵
 for i=1:num
    gdata(i,3)=length(find(gradienty(1:gdata(i,1))<0))/gdata(i,1);%评价条件2：变暗趋势
    gdata(i,4)=sum(1:gdata(i,1));%评价条件3：总变化量
-   gdata(i,5)=mean(mean(J(1:gdata(i,1),:)))-mean(mean(J(gdata(i,1)+1:m,:)));%评价条件4：区域评价灰度差
+   gdata(i,5)=abs(mean(mean(J(1:gdata(i,1),:)))-mean(mean(J(gdata(i,1)+1:m,:))));%评价条件4：区域评价灰度差
 end
 
 
