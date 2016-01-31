@@ -67,3 +67,10 @@ figure (3)
 colormap(cool)
 imagesc(Gy);
 axis off
+
+figure
+hsum=sum(J,2);
+bar(hsum)
+title('行灰度累加结果')
+xlabel('行号')
+ylabel('行灰度和')
