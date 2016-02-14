@@ -27,7 +27,7 @@ bar(gradienty)
 gdata=zeros(num,7);%创建评价矩阵
 [gdata(:,2),gdata(:,1)]=findpeaks(gradienty,'NPeaks',num,'SortStr','descend');%评价条件1：梯度和极值
 for i=1:num
-   %gdata(i,3)=length(find(gradienty(1:gdata(i,1))<0))/gdata(i,1);%评价条件2：变暗趋势
+  % gdata(i,3)=length(find(gradienty(1:gdata(i,1))<0))/gdata(i,1);%评价条件2：变暗趋势
 %    gdata(i,4)=sum(1:gdata(i,1));%评价条件3：总变化量
    gdata(i,4)=abs(mean((J(gdata(i,1)+1:m)))-mean((J(1:gdata(i,1)))));%评价条件3：区域灰度差
    gdata(i,5)=abs(mean(abs(gradienty(1:gdata(i,1))))-mean(abs(gradienty(gdata(i,1)+1:m))));%评价条件4：区域评价灰度差
@@ -37,15 +37,15 @@ gdata(:,4)=gdata(:,4)/max(gdata(:,4));%归一化
 gdata(:,5)=gdata(:,5)/max(gdata(:,5));%归一化
 % gdata(:,6)=[num:-1:1]/num;
 gdata(:,6)=linspace(max(gdata(:,2)),min(gdata(:,2)),num);
-gdata(:,7)=gdata(:,2)*0.5+1*gdata(:,3)+1*gdata(:,4)+0.5*gdata(:,5);%乘以不同影响因子，得到结果
+gdata(:,7)=gdata(:,2)*0.5+0.5*gdata(:,6)+1*gdata(:,4)+gdata(:,5);%乘以不同影响因子，得到结果
 [~,ind]=max(gdata(:,7));
 line=gdata(ind,1);
 subplot(211)
 plot([0,n],[line,line],'r-');%绘出海天线
 
-figure (3)
-hsum=sum(J,2);
-bar(hsum)
-title('行灰度累加结果')
-xlabel('行号')
-ylabel('行灰度和')
+% figure (3)
+% hsum=sum(J,2);
+% bar(hsum)
+% title('行灰度累加结果')
+% xlabel('行号')
+% ylabel('行灰度和')
