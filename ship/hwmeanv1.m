@@ -1,6 +1,6 @@
 %%均值目标检测
 clc ;close all;clear;
-I=imread('8.bmp');%读取图片
+I=imread('7.bmp');%读取图片
 tempmax=0;%找最大值临时变量
 pos=0;%此时灰度位置
 hth=500;%连通区域高阈值
@@ -35,7 +35,7 @@ area1=0.05;%高阈值
 area0=0.001;%低阈值
 areap=0;
 times=0;
-while or(max(areap)>area1,max(areap)<area0)
+while or(max(areap)>area1,max(areap)<area0)%自动取阈值
 for i=1:m
    for j=1:n
 %       if  (and((J(i,j)-avrm(i)>threshold), (J(i,j)-avrn(j)>threshold)))

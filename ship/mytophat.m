@@ -1,6 +1,6 @@
 
 clc ;close all;clear;
-I=imread('4.bmp');%∂¡»°Õº∆¨
+I=imread('18.bmp');%∂¡»°Õº∆¨
 I=rgb2gray(I);%ª“∂»ªØ
 figure
 I=myhistf( I,1.5,600 );

@@ -2,6 +2,7 @@
 clc ;close all;clear;
 I=imread('lowd.png');%读取图片
 tempmax=0;%找最大值临时变量
+k=0.5;
 pos=0;%此时灰度位置
 hth=500;%连通区域高阈值
 lth=10;%连通区域低阈值
@@ -15,9 +16,14 @@ title('原始图像')
 
 J=myhistf( J,1.5,600 );
 line=myline(J);
+thresh = 255*graythresh(J);     %自动确定二值化阈值，减小背景影响
+J = J-k*thresh*uint8(ones(m,n));
+%hophat变换
+% se1 = strel('line',8,4);
+% J= imopen(J,se1);
 subplot(412)
 imshow(J)
-J(1:uint8(line-floor(m/10)),:)=0;
+J(1:uint8(line-floor(m/12)),:)=0;
 A=fspecial('average',8);%均值滤波
 J=filter2(A,J,'same');
 
