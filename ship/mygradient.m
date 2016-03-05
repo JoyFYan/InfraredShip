@@ -1,5 +1,5 @@
 clc;close all;clear;
-I=imread('5.bmp');%读取图片
+I=imread('4.bmp');%读取图片
 lamda=2;
 num=5;%极值数量
 J=rgb2gray(I);%灰度化

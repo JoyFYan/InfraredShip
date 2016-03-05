@@ -1,9 +1,11 @@
 clc;close all;clear;
-I=imread('18.bmp');%读取图片
+I=imread('15.bmp');%读取图片
 lamda=2;
 num=5;%极值数量
 J=rgb2gray(I);%灰度化
 %I=myhistf( J,1.5,600 );
+imshow(J)
+figure
 subplot(211)
 imshow(I)
 hold on
@@ -38,8 +40,18 @@ gdata(:,5)=gdata(:,5)/max(gdata(:,5));%归一化
 % gdata(:,6)=[num:-1:1]/num;
 gdata(:,6)=linspace(max(gdata(:,2)),min(gdata(:,2)),num);
 gdata(:,7)=gdata(:,2)*0.5+0.5*gdata(:,6)+1*gdata(:,4)+gdata(:,5);%乘以不同影响因子，得到结果
+
 [~,ind]=max(gdata(:,7));
 line=gdata(ind,1);
+
+
+
+while(or(line<m/15,line>m/15*14))
+    gdata(ind,7)=0;
+    [~,ind]=max(gdata(:,7));
+    line=gdata(ind,1);
+end
+
 subplot(211)
 plot([0,n],[line,line],'r-');%绘出海天线
 
