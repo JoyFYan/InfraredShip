@@ -1,5 +1,5 @@
 clc;clear ;close all;
-I=imread('4.bmp');
+I=imread('12.bmp');
 I=rgb2gray(I);
 J=I;
 [M0, N0]=size(I);

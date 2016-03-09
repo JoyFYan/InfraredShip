@@ -1,5 +1,5 @@
 clc;clear ;close all;
-O=imread('2.bmp');%读取原始图像
+O=imread('12.bmp');%读取原始图像
 O=rgb2gray(O);%转为灰度图
 %[ O,~ ] = myhistf( O,1.5,600 );
 [M0, N0]=size(O);%读取原始大小
@@ -7,7 +7,7 @@ m=3;n=4;%区域大小
 %三次分辨率
 subplot(223)
 imshow(O);
-for multi=1:1
+for multi=1:3
     if multi==1
         I=imresize(O,0.25);
     elseif multi==2

@@ -1,6 +1,6 @@
 %%均值目标检测
 clc ;close all;clear;
-I=imread('lowd.png');%读取图片
+I=imread('12.bmp');%读取图片
 tempmax=0;%找最大值临时变量
 k=0.8;
 pos=0;%此时灰度位置
