@@ -1,6 +1,6 @@
 clear;close all;clc;
 k=0.8;
-D=5;
+D=35;
 I=imread('7.bmp');
 figure(3)
 imshow(I)
@@ -13,7 +13,7 @@ subplot(221)
 imshow(J);
 title('原始图像')
 r=0;
-while(r<0.8)
+while(r<0.8)%均值法背景抑制
     E=mean(mean(J));
     J(J<E)=E;
     E=mean(mean(J));
@@ -55,9 +55,10 @@ fd=fftshift(fft2(I3));
  for i =1:m
      for j=1:n
          dis=sqrt((i-m/2)^2+(j-n/2)^2);
-%          if((sqrt((i-m/2)^2+(j-n/2)^2))>D)%理想高通
-%              H(i,j)=1;
-        H(i,j)=1/(1+(sqrt(2)+1)*(D/dis))^2;
+          if(dis>D)%理想高通
+              H(i,j)=1;
+          end
+        %H(i,j)=1/(1+(sqrt(2)+1)*(D/dis))^2;
 %             D=sqrt((m-M)^2+(n-N)^2);
 %             H(m,n)=exp((-D^2)/(2*(D0)^2));
          

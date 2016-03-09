@@ -1,5 +1,5 @@
 clear;close all;clc;
-I=imread('8.bmp');
+I=imread('lowd.png');
 J=rgb2gray(I);
 r=0;
 [m, n]=size(J);
@@ -14,7 +14,7 @@ r=0;
 % J(J<=E)=0;
 % J(J>E)=255;
 subplot(211)
-J(J<=E)=0;
+%J(J<=E)=0;
 [J, pos]= myhistf( J,1.5,600 );
 imshow(J)
 % Ji=255-J;

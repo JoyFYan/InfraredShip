@@ -2,7 +2,7 @@ function [] = myhistrebuild(I,floor)
 
 if nargin==0
        floor=16;
-       I=imread('lowd.png');
+       I=imread('4.bmp');
 end
 if nargin==1
        floor=16;
