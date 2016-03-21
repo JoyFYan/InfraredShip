@@ -21,7 +21,7 @@ Jmat=histeq(J);
 imshow(Jmat);
 title('自动灰度直方图均衡')
 
-
+%%
 subplot(324)
 he=imhist(Jmat);%计算直方图
 bar(he)%绘制直方图
@@ -74,7 +74,7 @@ h0=imhist(ret);%计算直方图
 subplot(326)
 bar(h0)%绘制直方图
 title('灰度直方图结果')
-
+%%
 [g,~]=find(h0(1:floor(pos/khist))~=0);%不为0的序列
 G=h0(g);%剔除0后数组
 %LN0=length(g);%非0单元个数

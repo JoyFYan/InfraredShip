@@ -2,7 +2,7 @@ function [] = myhistrebuild(I,floor)
 
 if nargin==0
        floor=16;
-       I=imread('1.bmp');
+       I=imread('4.bmp');
 end
 if nargin==1
        floor=16;
@@ -12,8 +12,9 @@ if v==3
     I=rgb2gray(I);
 end
 subplot(121),imshow(I);
-se1=strel('disk',2);%这里是创建一个半径为5的平坦型圆盘结构元素
-I=imerode(I,se1);
+%se1=strel('disk',2);%这里是创建一个半径为5的平坦型圆盘结构元素
+%I=imerode(I,se1);
+I=medfilt2(I);
 subplot(122),imshow(I);
 all=m*n;
 eachf=ceil(all/floor);
@@ -60,4 +61,4 @@ end
 disp(Dres);
 disp(subres);
 disp(sres);
-[c in]=min(sres)
+[c in]=min(sres);
