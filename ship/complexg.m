@@ -1,5 +1,5 @@
 clc;clear ;close all;
-I=imread('bsmj.jpg');
+I=imread('7.bmp');
 [m,n,o]=size(I);
 if o~=1
     I=rgb2gray(I);
@@ -9,7 +9,7 @@ end
 subplot(221)
 imshow(I)
 title('£¨a£©Ô­Ê¼Í¼Ïñ')
-temp=1/3*[3j+3,10,-3j+3;
+temp=[3j+3,10,-3j+3;
         10j,0,-10j;
       3j-3,-10,-3j-3];
 %   temp=[1j+1,2,-1j+1;
@@ -43,9 +43,9 @@ res=zeros(m,n);
 res1=zeros(m,n);
 for i=5:m-5
     for j=5:n-5        
-            if or(abs(x(i,j))>xmax/1.5,abs(y(i,j))>ymax/1.5)
+            if or(abs(x(i,j))>xmax/3,abs(y(i,j))>ymax/3)
                 
-                res=plotline(i,j,i-fix(x(i,j)/20),j-fix(y(i,j)/20),res);
+                res=plotline(i,j,i-fix(x(i,j)/80),j-fix(y(i,j)/60),res);
                 res1(i,j)=1;
 %             if x>0
 %                if y>0
@@ -64,9 +64,13 @@ for i=5:m-5
       
     end
 end
-%res(res<2)=0;
+ res(res<6)=0;
 figure
 subplot(121)
 imshow(res,[])
 subplot(122)
 imshow(res1,[])
+se1 = strel('square',2);
+ BW2= imdilate(res,se1);
+ figure
+ imshow(BW2)
