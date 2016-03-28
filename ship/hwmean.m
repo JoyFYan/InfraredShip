@@ -26,13 +26,7 @@ line=myline(J);
 % J= imopen(J,se1);
 
 
-r=0;
-while(r<0.8)
-    E=mean(mean(J));
-    J(J<E)=E;
-    E=mean(mean(J));
-    r=double(length(J(J<=E)))/double(m*n);    
-end
+J=bgreduction( J,0.8 );
 
 subplot(412)
 imshow(J)

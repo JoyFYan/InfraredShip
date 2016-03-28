@@ -2,7 +2,7 @@ function [] = myhistrebuild(I,floor)
 
 if nargin==0
        floor=16;
-       I=imread('4.bmp');
+       I=imread('7.bmp');
 end
 if nargin==1
        floor=16;
@@ -11,6 +11,7 @@ end
 if v==3
     I=rgb2gray(I);
 end
+I= bgreduction( I,0.7 );
 subplot(121),imshow(I);
 %se1=strel('disk',2);%这里是创建一个半径为5的平坦型圆盘结构元素
 %I=imerode(I,se1);
